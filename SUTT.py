@@ -1,10 +1,12 @@
 import pandas as pd
 import json
+import os
 try:
     data= pd.read_excel("Timetable Workbook - SUTT Task 1.xlsx",sheet_name=None,skiprows=1)
     print("File read successfully.")
 except FileNotFoundError:
     print("File not found.")
+    os._exit(0)
 file=[]
 #traveling through each sheet for each object 
 
@@ -45,6 +47,7 @@ for i in range(1,7):
         sectionobject["room"]=str(int(sheet.loc[pos,"ROOM"]))
 
         #code for creating key value pair for timings
+        #I am converting the string "M 1 2 Th F 3" to a list ['M12','Th3','F3']
         timing=[]
         time=sheet.iloc[pos,9].split() 
         start=0
